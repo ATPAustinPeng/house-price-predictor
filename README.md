@@ -1,5 +1,13 @@
 # CS4641 Project Proposal: House Price Predictor
 
+## Team Members
+
+- Meena Ajith
+- Srajan Sunil Dube
+- Roshen Jegajeevan
+- Nilesh Manivannan
+- Austin Peng
+
 ## Introduction/Background
 
 ​	Various factors affect the prices of houses in any location. Without a proper way to determine the effect of those factors, it is not possible to find out the best time to buy a house, which is obviously at the lowest value possible within a certain time frame. Many studies have been done, both on the analysis of housing factors and long-term changes. There have been cases of “bubbles'' in the short term where the housing prices increase faster than income and then collapse (Kahn). When we start looking at the bigger picture, over a few hundred years, there are shifts in the importance of housing factors such as construction costs before 1900 to population count after World War II (Martijn, Minne). Combining both these short-term and long-term factors with machine learning would yield both better predictive capability and detailed insight.
