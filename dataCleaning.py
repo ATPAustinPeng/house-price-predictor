@@ -37,7 +37,8 @@ def clean_data():
                 lines[4] = int(lines[4])
                 lines[5] = (float(lines[5]) - 41) * 100
                 lines[6] = (float(lines[6]) - 44) * 100
-
+                if int(lines[2]) < 1000 or int(lines[2]) > 943000 or float(lines[3]) < 12 or float(lines[3]) > 600:
+                    continue
             writer.writerow(lines)
             count += 1
 
