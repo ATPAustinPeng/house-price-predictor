@@ -24,6 +24,13 @@ def linReg(trainDf, testDf2):
     clf.fit(train_feats, train_targets)
     y_pred = clf.predict(test_feats)
     r2 = r2_score(test_targets,y_pred)
+
+    normX = test_targets/np.linalg.norm(test_targets)
+    normY = y_pred/np.linalg.norm(y_pred)
+
+    mse = mean_squared_error(normY, normX)
+
+    print(mse)
     print(r2)
   
     x = test_targets[0]
@@ -33,6 +40,8 @@ def linReg(trainDf, testDf2):
 
     plt.plot(test_targets, y_pred, 'o', color= "blue", label = "")
     plt.plot(test_targets, y, color = "black")
+    plt.xlabel("Actual Prices")
+    plt.ylabel("Predicted Prices")
     plt.show()
 
 
