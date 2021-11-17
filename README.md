@@ -20,6 +20,16 @@ What factors affect the housing market in Georgia and how could the economic, lo
 
 We performed the data collection through an analysis of different Eastern countries and their housing markets. We decided on Georgia after finding a housing dataset on Kaggle which contained the features we wanted to analyze. We attempted to assess datasets from other sources such as DataWorld, Redfin, and Zillow but decided to proceed with Kaggle as there were not significant amounts of housing information on Georgia.
 
+Below are box plots of three features: price (USD), space (m^2), number of rooms.
+
+<img src="./box-plot-price-usd.png" width="300">
+<img src="./box-plot-space-m2.png" width="300">
+<img src="./box-plot-number-of-rooms.png" width="300">
+
+Below is a heatmap displaying the correlation between the features we inputted into PCA.
+
+<img src="./feature-heatmap.png" width="450">
+
 ## Methods
 
 After attaining our dataset, we first cleaned up any errors, null values, and discrepancies. We dropped any rows with large amounts of null values. We then proceeded to drop any unnecessary columns that wouldn’t give us any useful information when we do our analysis. We checked for any errors such as housing prices being 0 or negative and then standardized the data to bring it into a uniform format. Limits were also set for housing space and price to filter out any outliers to have a more uniform dataset. The original dataset is called data.json and the final cleaned dataset is called clean_data.csv (both are on GitHub).
