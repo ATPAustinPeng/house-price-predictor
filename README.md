@@ -1,4 +1,4 @@
-# CS4641 Project Proposal: House Price Predictor
+# CS4641 Midterm Report: House Price Predictor
 
 ## Team Members
 
@@ -10,7 +10,7 @@
 
 ## Introduction/Background
 
-Various factors affect the prices of houses in any location. Without a proper way to determine the effect of those factors, it is impossible to find out the best time to purchase a house, which is obviously at the lowest value possible within a specific time frame. Many studies analyzed housing factors and long-term changes. However, these studies have been completed mainly in the US and Europe, examining developed countries in a capitalistic economy. Our project will aim to analyze the housing market of an untapped area such as Georgia (the country, not the state). Georgia ranks 100th in GDP per capita and is a developing country, but still has one of the most capitalistic societies in the world. Looking at the housing market in this country would allow us to gain new information that we couldn’t attain by doing the same repetitive analysis on Western countries. This machine learning analysis would yield both better predictive capability and detailed insight into a potentially untapped market.
+Various factors affect the prices of houses in any location. Without a proper way to determine the effect of those factors, it is impossible to find out the best time to purchase a house, which is obviously at the lowest value possible. Many studies analyzed housing factors and long-term changes. However, these studies have been completed mainly in the US and Europe, examining developed countries in a capitalistic economy. Our project will aim to analyze the housing market of an untapped area such as Georgia (the country, not the state). Georgia ranks 100th in GDP per capita and is a developing country, but still has one of the most capitalistic societies in the world. Looking at the housing market in this country would allow us to gain new information that we couldn’t attain by doing the same repetitive analysis on Western countries. This machine learning analysis would yield both better predictive capability and detailed insight into a potentially untapped market.
 
 ## Problem Definition
 
@@ -18,18 +18,34 @@ What factors affect the housing market in Georgia and how could the economic, lo
 
 ## Data Collection
 
-We performed the data collection through an analysis of different Eastern countries and their housing markets. We decided on Georgia after finding a housing dataset on Kaggle that had all the features we wanted to analyze. We assessed further datasets from other sources such as DataWorld, Redfin, and Zillow but decided to proceed further with Kaggle as there weren't significant amounts of housing information on Georgia.
+We performed the data collection through an analysis of different Eastern countries and their housing markets. We decided on Georgia after finding a housing dataset on Kaggle which contained the features we wanted to analyze. We attempted to assess datasets from other sources such as DataWorld, Redfin, and Zillow but decided to proceed with Kaggle as there were not significant amounts of housing information on Georgia.
 
 ## Methods
 
-After attaining our dataset, we first cleaned up any errors, null values, and discrepancies. We first dropped any rows with any large amounts of null values. We then proceeded to drop any unnecessary columns that wouldn’t give us any useful information when we do our analysis. We checked for any errors such as housing prices being 0 or negative and then standardized the data to bring it into a uniform format. First, we proceeded with PCA and used dimensionality reduction to keep essential data and speed up calculations in the testing phase of the analysis. After dimensionality reduction, we decided to use logistic regression to find the correlation between different features in the housing market of Georgia. This is because logistic regression can be used to analyze the effects that each feature has on another. We decided to proceed with logistic regression over linear regression as we preferred to have a discrete result (the predicted price of the house) rather than a continuous result that we would get from linear regression. We utilized an 80/20 split when splitting out data up into training and testing components: 80% training and 20% testing. We performed logistic regression on the training data to create a model that would predict housing prices given certain features. We will then use this model with our testing data to test our final 20% to confirm the effectiveness and accuracy of our analysis.
+After attaining our dataset, we first cleaned up any errors, null values, and discrepancies. We dropped any rows with large amounts of null values. We then proceeded to drop any unnecessary columns that wouldn’t give us any useful information when we do our analysis. We checked for any errors such as housing prices being 0 or negative and then standardized the data to bring it into a uniform format. Limits were also set for housing space and price to filter out any outliers to have a more uniform dataset. The original dataset is called data.json and the final cleaned dataset is called clean_data.csv (both are on GitHub).
 
-## Potential Results And Discussion
+We performed dimensionality reduction using PCA to keep only the most essential features and speed up calculations in the testing phase of the analysis. We utilized an 80/20 split when splitting out data up into training and testing components: 80% training and 20% testing.
 
-There could be multiple interesting results that arise when we combine both long-term and short-term factors. For example, predictions that the housing market would crash during Covid were proven wrong when results arose that housing prices were resilient to pandemics (Grybauskas, Pilinkiene, Stundziene). Combining anomalies like this into our analysis would allow us to have a more effective model. We believe the results will be unexpected since the current time period is unique, given that we are not necessarily post-pandemic but businesses are still returning to normal with the economy's highest inflation rates since The Great Depression.
+After PCA and examining which features would be the most effective in the model, we decided to use linear regression to find the correlation between different features in the housing market of Georgia and create a housing price predictor. We chose linear regression because a continuous result favored our house price predictions better. Once we completed linear regression, we decided to run a random decision forest on our data. We have not yet fully completed and evaluated the predicted output of this model yet.
+
+## Midterm Checkpoint Results And Discussion
+### PCA Results:
+Through PCA we were able to reduce our dataset from 6 features to 2 features. The variance was .625 or 62.5% which means that around 37.5% of the original data was lost when reducing features. The resulting PCA variance was respectable but we can definitely improve it to a more acceptable value. We can make this improvement by graphing box plots and introducing a heatmap of correlations between the features.
+
+### Linear Regression Results:
+The R squared value obtained from linear regression was .502 which means there is a low to moderate correlation between the predicted values and the ground truth values. This is likely due to high variability and outliers in our dataset. We realized that there are still outliers we have to filter out. Possible solutions for this include deleting the first and last quartiles of the data or introducing a k-nearest neighbors outlier detection method. We also noticed that there are duplicate data points in our dataset and removing them would improve our predicted output.
+
+<img src="./linRegPlt.png" width="450">
+
+The plot above shows the actual prices versus the predicted prices with a line of best fit.
+
+### Random Decision Forest Results:
+We implemented the Random Decision Forest model but haven't fully evaluated and analyzed our results. So far, we have obtained an R squared value of .6485 which means there is a moderate correlation between the predicted values and the ground truth values. Filtering our dataset as mentioned above will also likely improve our Random Forest result. Our next step is to graph our results and evaluate our model using the RMSE metric
+
+### Future Improvements
+For our final project, we will make the aforementioned changes to our dataset and already implemented models. In addition, we will consider using other continuous supervised learning algorithms such as Naive-Bayes and neural networks and will evaluate them on the RMSE and R squared metrics. 
 
 ## Timeline
-
 **October**
 10/03 ~ 10/09
 
