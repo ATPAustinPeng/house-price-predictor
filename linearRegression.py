@@ -28,7 +28,7 @@ def linReg(trainDf, testDf2):
     normX = test_targets/np.linalg.norm(test_targets)
     normY = y_pred/np.linalg.norm(y_pred)
 
-    mse = mean_squared_error(normY, normX)
+    mse = mean_squared_error(normX, normY)
 
     print(mse)
     print(r2)
@@ -44,6 +44,7 @@ def linReg(trainDf, testDf2):
     plt.ylabel("Predicted Prices")
     plt.show()
 
+.0000267
 
 if __name__ == '__main__':
     trainDf, testDf2 = dimRed()

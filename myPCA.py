@@ -47,7 +47,7 @@ def dimRed():
     testPC = pca.fit_transform(testFeats)
     
     print(np.cumsum(pca.explained_variance_ / np.sum(pca.explained_variance_))[0])
-    
+
     df = pd.DataFrame(principalComponents, columns = ['train_A', 'train_B'])
     testDf = pd.DataFrame(testPC, columns = ['test_A', 'train_B'])
 
