@@ -76,7 +76,7 @@ Random forest works the best when there is highly dimensional data and a large a
 We wanted to examine clustering to see if there were any sections within the data that were actually fit by K-means. We first used the elbow method to plot explained variation by the number of clusters to determine the optimal amount of clusters. The elbow was situated at 3 so we proceeded with 3 clusters. We then performed K-means with 3 clusters.
 
 <img src="./plot_elbow_method.png" width="400">
-<img src="./plot_kmeans.png" width="400">
+<img src="./plot_kmeans.png" width="600">
 
 Clustering seemed to not be an applicable choice as the data is very dense and not separable. Because of this, we decided to proceed with our other models.
 
