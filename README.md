@@ -75,7 +75,8 @@ Random forest works the best when there is highly dimensional data and a large a
 ### K-Means Results
 We wanted to examine clustering to see if there were any sections within the data that were actually fit by K-means. We first used the elbow method to plot explained variation by the number of clusters to determine the optimal amount of clusters. The elbow was situated at 3 so we proceeded with 3 clusters. We then performed K-means with 3 clusters.
 
-<insert kmeans plots>
+<img src="./plot_elbow_method.png" width="400">
+<img src="./plot_kmeans.png" width="400">
 
 Clustering seemed to not be an applicable choice as the data is very dense and not separable. Because of this, we decided to proceed with our other models.
 
@@ -83,22 +84,23 @@ Clustering seemed to not be an applicable choice as the data is very dense and n
 
 Neural networks mimic how a human brain works in order to recognize relationships within large amounts of data. They are especially useful in financial situations where prices must be forecast. This is because the networks can identify certain nonlinear relationships and patterns that simple technical analysis cannot identify. Since our project revolves around predicting housing prices in Georgia, we thought that a neural network would be a good method to use. We initially tried running a convolutional neural network but soon found that it was better suited for classification and problems such as image analysis. We thus defined the following network:
 
-<img src="./plot_neural_network.png" width="400">
+<img src="./nn-architecture.png" width="400">
 
 We spent quite a while tuning the parameters and adding/removing layers and found that this layout gave us the best results. We also found that dense layers worked best because we wanted to find the strongest association from a multitude of features to the house price.
 By running the above neural network on our cleaned data, we were able to predict prices with a mean absolute percentage error of 30.964% as well as a mean squared logarithmic error loss of 0.1375 as shown below:
 
-<insert neural network image>
+<img src="./nn-loss-mape.png" width="400">
 
 We decided to use these two metrics because they were the best representative of our continuous prediction model. The mean absolute percentage error helped measure our accuracy and since it was somewhat low, it tells us that our model was reasonably accurate. The loss value was also low which means our model performed well. Here are graphs of these metrics over time:
 
-<insert nn metrics over time>
+<img src="./plot_nn_mape_vs_time.png" width="400">
+<img src="./plot_nn_loss_vs_time.png" width="400">
 
 These graphs show a clear decrease in both the loss and mean absolute percentage error over time, also indicating that our model was effective.
 
 Here is a graph showing our predicted house prices vs the actual house prices. Clearly, the model worked fairly well in predicting the house prices.
 
-<insert predict house price vs actual house price plot>
+<img src="./plot_neural_network.png" width="400">
 
 This model provided us with a method that is more accurate than the regression models but not as accurate as the random forest method. Neural networks have a large number of free parameters which gives them the ability to analyze and fit more complex data that the other models could not. However, there are also limitations such as the requirement of large amounts of training data, which we were able to provide to a certain extent. As a result, we were able to utilize this model with decent accuracy.
 
