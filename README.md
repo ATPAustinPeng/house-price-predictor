@@ -1,4 +1,4 @@
-# CS4641 Midterm Report: House Price Predictor
+# CS4641 Final Report: House Price Predictor
 
 ## Team Members
 
@@ -10,50 +10,109 @@
 
 ## Introduction/Background
 
-Various factors affect the prices of houses in any location. Without a proper way to determine the effect of those factors, it is impossible to find out the best time to purchase a house, which is obviously at the lowest value possible. Many studies analyzed housing factors and long-term changes. However, these studies have been completed mainly in the US and Europe, examining developed countries in a capitalistic economy. Our project will aim to analyze the housing market of an untapped area such as Georgia (the country, not the state). Georgia ranks 100th in GDP per capita and is a developing country, but still has one of the most capitalistic societies in the world. Looking at the housing market in this country would allow us to gain new information that we couldn’t attain by doing the same repetitive analysis on Western countries. This machine learning analysis would yield both better predictive capability and detailed insight into a potentially untapped market.
+Various factors affect the prices of houses in any location. Without a proper way to determine the effect of those factors, it is impossible to find out the best time to purchase a house, which is obviously at the lowest value possible within a specific time frame. Many studies analyzed housing factors and long-term changes. However, these studies have been completed mainly in the US and Europe, examining developed countries in a capitalistic economy. Our project will aim to analyze the housing market of an untapped area such as Georgia (the country, not the state). Georgia ranks 100th in GDP per capita and is a developing country, but still has one of the most capitalistic societies in the world. Looking at the housing market in this country would allow us to gain new information that we couldn’t attain by doing the same repetitive analysis on Western countries. This machine learning analysis would yield both better predictive capability and detailed insight into a potentially untapped market.
 
 ## Problem Definition
 
-What factors affect the housing market in Georgia and how could the economic, locational, and political environment forecast for the current and future housing market for certain areas?
+- What factors affect the housing market in Georgia?
+- How could we best predict the prices given features such as square footage, number of rooms, number of bedrooms, and whether the house is furnished.
 
 ## Data Collection
 
-We performed the data collection through an analysis of different Eastern countries and their housing markets. We decided on Georgia after finding a housing dataset on Kaggle which contained the features we wanted to analyze. We attempted to assess datasets from other sources such as DataWorld, Redfin, and Zillow but decided to proceed with Kaggle as there were not significant amounts of housing information on Georgia.
+We performed the data collection through an analysis of different Eastern countries and their housing markets. We decided on Georgia after finding a housing dataset on Kaggle that had all the features we wanted to analyze. We assessed further datasets from other sources such as DataWorld, Redfin, and Zillow but decided to proceed further with Kaggle as there weren't significant amounts of housing information on Georgia.
 
-Below are box plots of three features: price (USD), space (m^2), number of rooms.
-
-<img src="./box-plot-price-usd.png" width="300">
-<img src="./box-plot-space-m2.png" width="300">
-<img src="./box-plot-number-of-rooms.png" width="300">
-
-Below is a heatmap displaying the correlation between the features we inputted into PCA.
-
-<img src="./feature-heatmap.png" width="450">
+<INSERT GRAPHS>
 
 ## Methods
 
-After attaining our dataset, we first cleaned up any errors, null values, and discrepancies. We dropped any rows with large amounts of null values. We then proceeded to drop any unnecessary columns that wouldn’t give us any useful information when we do our analysis. We checked for any errors such as housing prices being 0 or negative and then standardized the data to bring it into a uniform format. Limits were also set for housing space and price to filter out any outliers to have a more uniform dataset. The original dataset is called data.json and the final cleaned dataset is called clean_data.csv (both are on GitHub).
+Preprocessing was completely changed during the final segment of our project. We realized the initial changes in the dataset did not have a significant impact on the final calculations so we imposed harsher restrictions on the data. We first dropped and replaced nulls, as well as removed duplicate columns and data. Our dataset included data from a wide range of areas around Tbilisi. In order to keep our dataset more consistent, we set a range requiring the houses to be within the specified urban area of Tbilisi, the capital of Georgia. We continued by extracting more information from the description of each house listing. We parsed it for the number of rooms and the number of bedrooms. At the end of preprocessing, we had a total of 7 features, price, space, number of rooms, number of bedrooms, whether the listing was furnished, latitude, and longitude. As a sanity check, we also created a heatmap showing the correlations between each feature. A correlation of 1 means the features are greatly correlated while a correlation of 0 means the features are not correlated.
 
-We performed dimensionality reduction using PCA to keep only the most essential features and speed up calculations in the testing phase of the analysis. We utilized an 80/20 split when splitting out data up into training and testing components: 80% training and 20% testing.
+<insert heatmap>
 
-After PCA and examining which features would be the most effective in the model, we decided to use linear regression to find the correlation between different features in the housing market of Georgia and create a housing price predictor. We chose linear regression because a continuous result favored our house price predictions better. Once we completed linear regression, we decided to run a random decision forest on our data. We have not yet fully completed and evaluated the predicted output of this model yet.
+Now, we were able to proceed with principal component analysis (PCA) and use dimensionality reduction to keep only the essential features and speed up calculations in the testing phase of the analysis. We achieved a PCA feature retention value of 69.376%. 
 
-## Midterm Checkpoint Results And Discussion
-### PCA Results:
-Through PCA we were able to reduce our dataset from 6 features to 2 features. The variance was .625 or 62.5% which means that around 37.5% of the original data was lost when reducing features. The resulting PCA variance was respectable but we can definitely improve it to a more acceptable value. We can make this improvement by graphing box plots and introducing a heatmap of correlations between the features.
+After dimensionality reduction and understanding which features would be the most effective in the analysis, we decided to use 6 different models to examine our data. We started with four different machine learning models: ridge regression, lasso regression, linear regression, and random forest classifier. These were the four models that we thought were best for our data since we wanted to continuously predict house prices given certain features. By approaching the data from different angles, we can understand which technique would be able to utilize the correlations within the data and select the model which has the best predictive capability. With extra time, we also implemented a neural network and k-means clustering to examine other models and their effects on the data. We did this to attain a more holistic approach through non-regression techniques.
 
-### Linear Regression Results:
-The R squared value obtained from linear regression was .502 which means there is a low to moderate correlation between the predicted values and the ground truth values. This is likely due to high variability and outliers in our dataset. We realized that there are still outliers we have to filter out. Possible solutions for this include deleting the first and last quartiles of the data or introducing a k-nearest neighbors outlier detection method. We also noticed that there are duplicate data points in our dataset and removing them would improve our predicted output.
+## Final Results And Discussion
+Our linear regression analysis provided the following results: 
+We started with linear regression to see if we can find a direct correlation between one or some of our features to the house prices.
+We ran the linear regression model on the features generated by PCA and output the R-squared and MSE values. We chose R-squared as it is a good representation of accuracy and we chose MSE to tell us the error in our model.
 
-<img src="./linRegPlt.png" width="450">
+The R squared value we obtained was .4711848766 which means there is a low correlation between the predicted values and the true values. We also got an MSE of 2.10087e-05 which is very good. 
 
-The plot above shows the actual prices versus the predicted prices with a line of best fit.
+<insert linear regression plot>
 
-### Random Decision Forest Results:
-We implemented the Random Decision Forest model but haven't fully evaluated and analyzed our results. So far, we have obtained an R squared value of .6485 which means there is a moderate correlation between the predicted values and the ground truth values. Filtering our dataset as mentioned above will also likely improve our Random Forest result. Our next step is to graph our results and evaluate our model using the RMSE metric
+The plot above shows the actual prices vs the predicted prices with a line of best fit.
 
-### Future Improvements
-For our final project, we will make the aforementioned changes to our dataset and already implemented models. In addition, we will consider using other continuous supervised learning algorithms such as Naive-Bayes and neural networks and will evaluate them on the RMSE and R squared metrics. 
+The R-squared value was not where we wanted it to be. This could be due to many reasons as linear regression just analyzes the linearity between an independent and dependent variable. Even after all the data processing, we failed to find any linearity between our features and the house prices. The data may not have been linear and some form of polynomial regression may have been a better fit for the data, which is why we received such a low accuracy. In addition to this, we were also losing a lot of our data when we ran PCA. The lesser amount of data could also have been a reason why we received such a low accuracy. 
+
+Ridge and Lasso Regression
+
+After running linear regression on our data, we decided to test ridge and lasso regression as well to see how it responded to L1 and L2 regularization. Regularization helps simplify the model by essentially eliminating unnecessary or unrelated parameters. We predicted that these models would improve our accuracy and wanted to see whether L1 or L2 would yield better results for our data.
+
+Our Lasso regression analysis provided the following results:
+
+The R squared value was 0.638180806 which means there is a moderate correlation between the predicted values and the true values. We also had an MSE value of 1.4020523e-05
+
+<insert lasso regression plot>
+
+Lasso regression had a much better but still not adequate R-squared value. After an analysis, we came up with a few different reasons this could be the case. Lasso regression utilizes L1 regularization, or shrinkage, resulting in more sparse models with fewer parameters. Regularization helps us avoid overfitting if there is too much background noise or if our model isn’t able to analyze the data properly. L1 regularization is preferred when there are a high amount of features being utilized in our analysis. Since we already started with a small number of features in our dataset, there was likely not enough information to lead to a drastic improvement from linear regression. However, with the limited features, we were able to get quite a large improvement in accuracy compared to linear regression.
+
+Our Ridge regression provided the following results:
+
+The R squared value was 0.67642736 which means there is a moderate correlation between the predicted values and the true values. We also had an MSE value of 1.40204775e-05
+
+<insert ridge regression plot>
+
+Ridge regression utilizes L2 regularization by constricting coefficients rather than shrinking them to 0 like lasso regression. This allows all the features to be used while maintaining strict penalties. We also extended our regression by constructing polynomial features from the data. Usually, L2 regularization is more accurate than L1 at a higher computational cost, and the difference was seen here since the R^2 value for ridge regression was slightly higher than lasso regression. Similar to L1 regression though, we did not have enough features to make a drastic difference in accuracy but were still able to see a significant difference when compared to linear regression.
+
+Lasso regression and ridge regression performed much better than linear regression on our data. Clearly, the regularization made quite a large difference in the results as it must have cut out unnecessary features and thus found a better correlation. The best way to improve our accuracy with these models would be to increase the size of our data by increasing the number of features, thus allowing Ridge and Lasso regression to perform better.
+
+Our Random Forest regression provided the following results:
+
+The R squared value was .82764377  which means there is a high correlation between the predicted values and the true values.
+
+<insert random forest plot>
+
+Random forest works the best when there is highly dimensional data and a large amount of material to work with. One reason random forest may have worked well is because the model is much more robust with outliers and non-linear data and is also able to handle unbalanced data very well. The model also has a low bias and moderate variance. This works exceptionally well with our data which is why we were able to attain such a high R^2 value since it was able to surpass some of the limitations in the other regression techniques.
+
+Our K-means clustering analysis provided the following results:
+	We wanted to examine clustering to see if there were any sections within the data that were actually fit by K-means. We first used the elbow method to plot explained variation by the number of clusters to determine the optimal amount of clusters. The elbow was situated at 3 so we proceeded with 3 clusters. We then performed K-means with 3 clusters.
+
+<insert kmeans plots>
+
+Clustering seemed to not be an applicable choice as the data is very dense and not separable. Because of this, we decided to proceed with our other models.
+
+Our neural network analysis provided the following results:
+
+Neural networks mimic how a human brain works in order to recognize relationships within large amounts of data. They are especially useful in financial situations where prices must be forecast. This is because the networks can identify certain nonlinear relationships and patterns that simple technical analysis cannot identify. Since our project revolves around predicting housing prices in Georgia, we thought that a neural network would be a good method to use. We initially tried running a convolutional neural network but soon found that it was better suited for classification and problems such as image analysis. We thus defined the following network:
+
+<insert image of network>
+
+We spent quite a while tuning the parameters and adding/removing layers and found that this layout gave us the best results. We also found that dense layers worked best because we wanted to find the strongest association from a multitude of features to the house price.
+By running the above neural network on our cleaned data, we were able to predict prices with a mean absolute percentage error of 30.964% as well as a mean squared logarithmic error loss of 0.1375 as shown below:
+
+<insert neural network image>
+
+We decided to use these two metrics because they were the best representative of our continuous prediction model. The mean absolute percentage error helped measure our accuracy and since it was somewhat low, it tells us that our model was reasonably accurate. The loss value was also low which means our model performed well. Here are graphs of these metrics over time:
+
+<insert nn metrics over time>
+
+These graphs show a clear decrease in both the loss and mean absolute percentage error over time, also indicating that our model was effective.
+
+Here is a graph showing our predicted house prices vs the actual house prices. Clearly, the model worked fairly well in predicting the house prices.
+
+<insert predict house price vs actual house price plot>
+
+This model provided us with a method that is more accurate than the regression models but not as accurate as the random forest method. Neural networks have a large number of free parameters which gives them the ability to analyze and fit more complex data that the other models could not. However, there are also limitations such as the requirement of large amounts of training data, which we were able to provide to a certain extent. As a result, we were able to utilize this model with decent accuracy.
+
+Conclusion:
+
+Overall, after extensive analysis and testing of 6 different predictive models, random forest and neural networks seem to yield the best results within the data. The other 3 regression models and k-means clustering model weren’t able to fit the data well and had much lower metrics and visualizations due to their model's limitations. However, random forest and neural networks were able to utilize their respective model's robustness and versatility which led them to have the highest predictive capability. Random forest was able to look past outliers and unbalanced data to find correlations that led it to have an R^2 of 0.82764377. Neural networks had the ability to handle much more complex relationships between variables which led us to a mean absolute percentage error of ~32%. 
+
+While some of our results were fairly positive, we could potentially do even better. Our dataset was quite small and we had a limited number of features. Further preprocessing and parsing the house listing's descriptions for more details would add more features to the dataset. The additional features would be incredibly helpful as it would lead to PCA performing much better, and thus linear regression performing better as well. It would also lead to lasso and ridge regression having more data to work with and regularize, thus improving their accuracy as well.
+
+Overall, our analysis of Georgia led us to see which models have the highest capability in a developing country with a still-emerging housing market. The results were surprising but made sense considering the variability and inconsistency in the original dataset. After intensive cleaning, preprocessing, training, and testing, we were finally able to select two models: random forest and neural networks that worked the best with our dataset.
 
 ## Timeline
 **October**
