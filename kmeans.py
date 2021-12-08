@@ -1,24 +1,7 @@
 import pandas as pd
-import statsmodels.formula.api as smf
-import statsmodels.api as sm
 from sklearn.cluster import KMeans
 import plotly.express as px
-import matplotlib
 import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.cluster import KMeans
-from sklearn.model_selection import train_test_split
-from sklearn import datasets, linear_model
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.svm import SVR
-from sklearn.metrics import r2_score
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn import metrics
-from sklearn import preprocessing
-from sklearn import utils
-from sklearn.metrics import f1_score
-import numpy as np
 
 
 df = pd.read_csv('clean_data.csv')
