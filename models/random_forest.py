@@ -1,19 +1,13 @@
-import sklearn
 from sklearn.model_selection import train_test_split
-from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestRegressor
-import pandas as pd
-import numpy as np
-import csv
 from random_forest_pca import dimension_reduction
 
 
-def ranFor(trainDf, testDf2):
+def random_forest(trainDf, testDf2):
     features = ['test_A', 'test_B', 'test_C']
-    test_targets = testDf2.loc[:, ['price']].values
+    # test_targets = testDf2.loc[:, ['price']].values
     test_feats = testDf2.loc[:, features].values
     test_feats = StandardScaler().fit_transform(test_feats)
 
@@ -40,4 +34,4 @@ def ranFor(trainDf, testDf2):
 
 if __name__ == '__main__':
     trainDf, testDf2 = dimension_reduction()
-    ranFor(trainDf, testDf2)
+    random_forest(trainDf, testDf2)

@@ -2,14 +2,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error, r2_score
 from my_pca import dimension_reduction
 
 
-def linReg(trainDf, testDf):
+def linear_regression(trainDf, testDf):
     train_features = ['train_A']
     train_targets = trainDf.loc[:, ['price']].values
     train_feats = trainDf.loc[:, train_features].values
@@ -47,4 +46,4 @@ def linReg(trainDf, testDf):
 
 if __name__ == '__main__':
     trainDf, testDf = dimension_reduction()
-    linReg(trainDf, testDf)
+    linear_regression(trainDf, testDf)

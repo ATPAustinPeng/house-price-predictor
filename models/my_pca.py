@@ -14,7 +14,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 def dimension_reduction():
     csvFile = []
     data = []
-    with open('preprocessed_data.csv', mode='r', encoding='UTF-8') as file:
+    with open('../preprocessing/preprocessed_data.csv', mode='r', encoding='UTF-8') as file:
         csvFile = csv.reader(file)
         count = 0
         for line in csvFile:
